@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>index</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+        crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+        <% if(typeof user !== 'undefined'){ %>
+            <%- include("menu_logged", {error: error, user: user}); %>
+        <% }else{ %>
+            <%- include("menu", {error: error}); %>
+        <% } %>
+        <% for (var i = 0; i < posts.length; i++) { %>
+            <div class="well" id="<%= posts[i].id %>">
+                <div class="media">
+                    <a class="pull-left" href="/userpg?uid=<%= posts[i].user_id %>">
+                        <img class="media-object" src="http://placekitten.com/150/150">
+                    </a>
+                    <div class="media-body">
+                        <h4 class="media-heading"><%= posts[i].title %></h4>
+                        <p class="text-left">By <%= posts[i].uploader %></p>
+                        <p><%= posts[i].content %></p>
+                        <% if(posts[i].picture != null) { %>
+                        <p><img src="<%= posts[i].picture %>" height="10%" width="20%"> </p>
+                        <% } %>
+                        <ul class="list-inline list-unstyled">
+                            <li><span><i class="glyphicon glyphicon-calendar"></i> | <%= posts[i].uploaded %></span></li>
+                            <li>|</li>
+                            <% if(typeof user !== 'undefined'){ %>
+                                <% if(user.id != posts[i].user_id){ %>
+                                <a href="/report?p=<%= posts[i].id %>&u=<%= posts[i].user_id %>"><span> ⚠️ </span></a>
+                                <li>|</li>
+                                
+                            <% }} %>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        <% } %>
+
+        
+</body>
+
+</html>

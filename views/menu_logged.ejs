@@ -1,0 +1,23 @@
+<header>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">Connections</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/">Home</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="userpg?uid=<%= user.id %>">Hello, <%= user.firstName %></a></li>
+                <li><a href="/upload_post">Upload Post</a></li>
+                <% if(user.status == 1){ %>
+                    <li><a href="/admins">Admins Panel</a></li>
+                <% } %>
+                <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span>Log Out</a></li>
+            </ul>
+        </div>
+    </nav>
+    <% if(error) { %>
+    <h4 style="background-color: red; padding:3px;"><%= error %></h4>
+    <% } %>
+</header>

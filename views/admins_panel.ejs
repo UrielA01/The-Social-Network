@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>index</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+        integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous">
+    </script>
+</head>
+
+<body>
+    <%- include("menu_logged", {error: error, user: user}); %>
+    Users:
+    <% for (var i = 0; i < users.length; i++) {%>
+    <div class="well">
+        <div class="media">
+            <div class="media-body">
+                <a href="/userpg?uid=<%= users[i].id %>"> <h4 class="media-heading"><%= users[i].firstName %> <%= users[i].lastName %></h4></a>
+            </div>
+        </div>
+    </div>
+    <% } %>
+
+    Banned Users:
+    <% for (var i = 0; i < banned_users.length; i++) {%>
+    <div class="well">
+        <div class="media">
+            <div class="media-body">
+                <a href="/userpg?uid=<%= banned_users[i].id %>">
+                    <h4 class="media-heading"><%= banned_users[i].firstName %> <%= banned_users[i].lastName %></h4>
+                </a>
+                <form action="/ban" method="post">
+                    <input type="hidden" name="uid" value="<%= banned_users[i].id %>">
+                    <button type="submit" name="unban">Unban</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <% } %>
+
+    Reports:
+    <% for (var i = 0; i < reports.length; i++) {%>
+    <div class="well">
+        <div class="media">
+            <div class="media-body">
+                <h4 class="media-heading"><%= reports[i].reason %></h4>
+                <a href="/userpg?uid=<%= reports[i].reporter_id %>">
+                    <p class="text-left">reporter</p>
+                </a>
+                <a href="/userpg?uid=<%= reports[i].reported_user %>">
+                    <p class="text-left">The user</p>
+                </a>
+                <a href="/#<%= reports[i].reported_post %>">
+                    <p class="text-left">The post</p>
+                </a>
+                <form action="/ban" method="post">
+                    <input type="hidden" name="reported_user" value="<%= reports[i].reported_user %>">
+                    <input type="hidden" name="reportid" value="<%= reports[i].reportid %>">
+                    <input type="hidden" name="reported_post" value="<%= reports[i].reported_post %>">
+                    <button type="submit">Ban and delete post</button>
+                </form>
+                <form action="/ban" method="post">
+                    <input type="hidden" name="reported_post" value="<%= reports[i].reported_post %>">
+                    <button type="submit" name="deleteOnly">Delete post</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <% } %>
+
+
+</body>
+
+</html>

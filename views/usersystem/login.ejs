@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+        integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous">
+    </script>
+</head>
+
+<body>
+            <% if(typeof user !== 'undefined'){ %>
+            <%- include("../menu_logged", {error: error, user: user}); %>
+            <% }else{ %>
+            <%- include("../menu", {error: error}); %>
+            <% } %>
+    <div style="width: 50%; margin-left:25%">    
+        <!-- Default form login -->
+        <form class="text-center border border-light p-5" action="/login" method="POST">
+
+            <p class="h4 mb-4">Log In</p>
+
+            <!-- Email -->
+            <input type="email" id="defaultLoginFormEmail" name="email" class="form-control mb-4" placeholder="E-mail"><br>
+
+            <!-- Password -->
+            <input type="password" id="defaultLoginFormPassword" name="password" class="form-control mb-4" placeholder="Password"><br>
+
+            <!-- <div class="d-flex justify-content-around">
+                <div>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="defaultLoginFormRemember">
+                        <label class="custom-control-label" for="defaultLoginFormRemember">Remember me</label>
+                    </div>
+                </div>
+                <div>
+                    <a href="">Forgot password?</a>
+                </div>
+            </div> -->
+
+            <!-- Sign in button -->
+            <button class="btn btn-info btn-block my-4" type="submit">Sign in</button>
+
+            <!-- Register -->
+            <p>Not a member?
+                <a href="/signup">Register</a>
+            </p>
+
+        </form>
+    </div>
+</body>
+
+</html>
