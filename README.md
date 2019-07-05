@@ -1,4 +1,4 @@
-# The Socail Network
+# The Social Network
 
 Social network made as a graduation project, no special purpose for now.
 
