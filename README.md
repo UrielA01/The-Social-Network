@@ -12,7 +12,7 @@ You should install [node.js](https://nodejs.org) and [xampp](https://www.apachef
 
 ### Installing
 
-First of all you'll need to import the database, do this by opening [xampp in chrome](localhost/phpmyadmin) and importing the database from the project files (final_project.sql).
+First of all you'll need to import the database, do this by opening [xampp in chrome](localhost/phpmyadmin) and importing the database with [DB](DB.sql) file.
 
 Then download the repository and open terminal in it, run
 ```
